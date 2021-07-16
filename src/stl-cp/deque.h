@@ -1,3 +1,6 @@
+#include <iostream>
+using std::size_t;
+
 namespace CP {
     template <typename T>
     class deque {

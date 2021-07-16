@@ -7,8 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 #add_executable(pair "pair.cpp")
 #
-#set_target_properties(pair
-#    PROPERTIES
-#    RUNTIME_OUTPUT_DIRECTORY "bin")
-file(GLOB MyCSources src/*.cpp)
-add_executable(MyExecutable ${MyCSources})
+#file(GLOB MyCSources src/*.cpp)
+#add_executable(MyExecutable ${MyCSources})
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
+add_executable(pair "src/pair.cpp")
+add_executable(cpvectortest "src/cpvectortest.cpp")

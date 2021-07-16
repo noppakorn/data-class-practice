@@ -6,6 +6,7 @@ using namespace std;
 void printLine() {
     cout << "-----" << endl;
 }
+
 int main() {
     CP::deque<int> q;
     cout << "Push back 1,2" << endl;
@@ -24,13 +25,14 @@ int main() {
     q.push_front(0);
     q.push_back(200);
     q.push_back(201);
+    q.pop_front();
     cout << "After pop 1: " << q.back() << endl;
     q.pop_back();
     cout << "After pop 2: " << q.back() << endl;
     q.pop_back();
     cout << "After pop 3: " << q.back() << endl;
     while (!q.empty()) {
-        cout << q.front() << endl;
+        cout << q.front() << "--" << q.back() << endl;
         q.pop_front();
     }
 

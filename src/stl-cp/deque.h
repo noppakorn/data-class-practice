@@ -26,7 +26,7 @@ namespace CP {
                 }
             }
         public:
-            deque() : mData(new T[mCap]()), mCap(1), mSize(0), mFront(0) {}
+            deque() : mData(new T[1]()), mCap(1), mSize(0), mFront(0) {}
             deque(const deque<T> &a) : mData(new T[a.mCap]()), mCap(a.mCap), mSize(a.mSize), mFront(a.mFront) {
                 for (int i = 0; i < mCap; i++) {
                     mData[i] = a.mData[i];

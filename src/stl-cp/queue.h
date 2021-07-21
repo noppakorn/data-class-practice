@@ -54,9 +54,11 @@ namespace CP {
             }
             // Access
             const T& front() const { 
+                if (empty()) throw std::out_of_range("index out of range");
                 return mData[mFront];
             }
             const T& back() const {
+                if (empty()) throw std::out_of_range("index out of range");
                 return mData[(mFront + mSize -1) % mCap];
             }
             // Modifier
@@ -66,6 +68,7 @@ namespace CP {
                 mSize++;
             }
             void pop() {
+                if (empty()) throw std::out_of_range("index out of range");
                 mFront = (mFront + 1) % mCap;
                 mSize--;
             }

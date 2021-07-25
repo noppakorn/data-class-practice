@@ -15,7 +15,7 @@ int main() {
             stack.push(paren[c]);
         }
         else if (c == ']' || c == '}' || c == ')'){
-            if (stack.top() == c) {
+            if (!stack.empty() && stack.top() == c) {
                 stack.pop();
             } else {
                 cout << "Incorrect\n";

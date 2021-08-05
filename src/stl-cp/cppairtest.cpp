@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "stl-cp/pair.h"
+#include "pair.h"
 
 int main() {
     CP::pair<int,int> p1(1,4);

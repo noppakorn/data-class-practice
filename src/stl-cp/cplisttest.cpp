@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stl-cp/list.h"
+#include "list.h"
 using namespace std;
 
 int main() {

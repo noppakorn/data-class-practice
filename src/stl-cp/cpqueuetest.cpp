@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-#include "stl-cp/queue.h"
+#include "queue.h"
 #include <assert.h>
 #include <exception>
 

@@ -1,4 +1,4 @@
-#include "stl-cp/stackbyvector.h"
+#include "stackbyvector.h"
 #include <iostream>
 
 using std::cin;

@@ -23,4 +23,6 @@ add_executable(cpdequetest "src/cpdequetest.cpp")
 add_executable(cppriority_queuetest "src/cppriority_queuetest.cpp")
 add_executable(cplisttest "src/cplisttest.cpp")
 
+add_executable(huffman "src/huffman.cpp")
 add_executable(recursion "src/recursion.cpp")
+add_executable(tree_operation "src/tree_operation.cpp")

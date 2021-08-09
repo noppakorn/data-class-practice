@@ -14,6 +14,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 add_executable(main "src/main.cpp")
 add_executable(validParen "src/validParen.cpp")
 add_executable(M3D2 "src/M3D2.cpp")
+add_executable(pointer "src/pointer.cpp")
 
 add_executable(cppairtest "src/stl-cp/cppairtest.cpp")
 add_executable(cpvectortest "src/stl-cp/cpvectortest.cpp")

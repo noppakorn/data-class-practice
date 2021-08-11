@@ -20,15 +20,17 @@ namespace CP {
             data( ValueT() ), left( NULL ), right( NULL ), parent( NULL ) {}
           
           node(const ValueT &data, node* left, node* right, node* parent) :
-            data( ValueT() ), left( left ), right( right ), parent( parent ) {}
+            data( data ), left( left ), right( right ), parent( parent ) {}
       
       };
       class tree_iterator {
         protected:
           node* ptr;
         public:
-          tree_iterator() {}
-          tree_iterator() {}
+          tree_iterator() : ptr(NULL) {}
+
+          tree_iterator(node* a) : ptr(a) {}
+
           tree_iterator operator++() {
             if (ptr->right == NULL) {
               node* parent = ptr->parent;
@@ -82,12 +84,13 @@ namespace CP {
             return other.ptr != ptr;
           }
       };
-      node* mRoot; CompareT mLess;
+      node* mRoot; 
+      CompareT mLess;
       size_t mSize;
 
       int compare(const KeyT &k1, const KeyT &k2) {
         if (mLess(k1, k2)) return -1;
-        if (mLess(k2, k1)) return 1;
+        if (mLess(k2, k1)) return +1;
         return 0;
       }
       
@@ -118,6 +121,15 @@ namespace CP {
         if (parent == NULL) return mRoot;
         return mLess(k, parent->data.first) ? parent->left : parent->right;
       }
+
+      void delete_all_nodes(node* r) {
+          if (r == NULL) return;
+          delete_all_nodes(r->left);
+          delete_all_nodes(r->right);
+          delete r;
+      }
+      
+
     public:
       typedef tree_iterator iterator;
       map_bst(const map_bst<KeyT,MappedT,CompareT> &other) : mLess(other.mLess), mSize(other.mSize) {
@@ -136,6 +148,24 @@ namespace CP {
 
       ~map_bst() {
         clear();
+      }
+
+      std::size_t size() { return mSize; }
+
+      bool empty() { return mSize == 0; }
+
+      void clear() {
+          delete_all_nodes(mRoot);
+          mRoot = NULL;
+          mSize = 0;
+      }
+
+      iterator begin() {
+          return iterator(mRoot == NULL ? NULL : find_min_node(mRoot));
+      }
+
+      iterator end() {
+          return iterator(NULL);
       }
 
       iterator find(const KeyT &key) {
@@ -191,14 +221,6 @@ namespace CP {
         }
         return ptr->data.second;
       }
+  };
 }
-
-
-
-
-
-
-
-
-
 

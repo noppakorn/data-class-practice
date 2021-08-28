@@ -1,4 +1,3 @@
-//#include "/home/noppakorn/CP-2021-S1/data-class/stl-cp/map_bst.h"
 #include "map_bst.h"
 
 int main() {

@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 namespace CP {
 template <typename KeyT, typename MappedT, typename CompareT = std::less<KeyT>>

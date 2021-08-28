@@ -1,5 +1,5 @@
 #include <iostream>
-using namespace std;
+// using namespace std;
 
 namespace CP {
 template <typename KeyT, typename MappedT, typename CompareT = std::less<KeyT>>
@@ -156,6 +156,7 @@ class map_avl {
 
     node *rotate_left_child(node *r) {
         node *new_root = r->left;
+        r->set_left(new_root->right);
         new_root->set_right(r);
 
         new_root->right->set_height();
@@ -165,6 +166,7 @@ class map_avl {
 
     node *rotate_right_child(node *r) {
         node *new_root = r->right;
+        r->set_right(new_root->left);
         new_root->set_left(r);
 
         new_root->left->set_height();
@@ -178,17 +180,35 @@ class map_avl {
         }
         int balance = r->balance_value();
         if (balance == -2) {
-            if (r->left->balance == 1) {
+            if (r->left->balance_value() == 1) {
                 r->set_left(rotate_right_child(r->left));
             }
             r = rotate_left_child(r);
         } else if (balance == 2) {
-            if (r->left->balance == -1) {
-                r->set_right(rotate_left_child(r->left));
+            if (r->right->balance_value() == -1) {
+                r->set_right(rotate_left_child(r->right));
             }
             r = rotate_right_child(r);
         }
         r->set_height();
+        return r;
+    }
+
+    node *insert(const ValueT &val, node *r, node *&ptr) {
+        if (r == NULL) {
+            mSize++;
+            ptr = r = new node(val, NULL, NULL, NULL);
+        } else {
+            int cmp = compare(val.first, r->data.first);
+            if (cmp == 0) {
+                ptr = r;
+            } else if (cmp < 0) {
+                r->set_left(insert(val, r->left, ptr));
+            } else {
+                r->set_right(insert(val, r->right, ptr));
+            }
+        }
+        r = rebalance(r);
         return r;
     }
 
@@ -235,15 +255,11 @@ class map_avl {
     }
 
     std::pair<iterator, bool> insert(const ValueT &val) {
-        node *parent = NULL;
-        node *ptr = find_node(val.first, mRoot, parent);
-        bool not_found = (ptr == NULL);
-        if (not_found) {
-            ptr = new node(val, NULL, NULL, parent);
-            child_link(parent, val.first) = ptr;
-            mSize++;
-        }
-        return std::make_pair(iterator(ptr), not_found);
+        node *ptr = NULL;
+        size_t s = mSize;
+        mRoot = insert(val, mRoot, ptr);
+        mRoot->parent = NULL;
+        return std::make_pair(iterator(ptr), mSize > s);
     }
 
     size_t erase(const KeyT &key) {
@@ -275,14 +291,9 @@ class map_avl {
     }
 
     MappedT &operator[](const KeyT &key) {
-        node *parent = NULL;
-        node *ptr = find_node(key, mRoot, parent);
-        if (ptr == NULL) {
-            ptr = new node(std::make_pair(key, MappedT()), NULL, NULL, parent);
-            child_link(parent, key) = ptr;
-            mSize++;
-        }
-        return ptr->data.second;
+        std::pair<iterator, bool> result =
+            insert(std::make_pair(key, MappedT()));
+        return result.first->second;
     }
 };
 } // namespace CP

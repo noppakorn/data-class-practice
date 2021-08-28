@@ -27,3 +27,6 @@ add_executable(cplisttest "src/stl-cp/cplisttest.cpp")
 add_executable(huffman "src/tree/huffman.cpp")
 add_executable(recursion "src/tree/recursion.cpp")
 add_executable(tree_operation "src/tree/tree_operation.cpp")
+
+add_executable(cpmap_bsttest "src/stl-cp/cpmap_bsttest.cpp")
+add_executable(cpmap_avltest "src/stl-cp/cpmap_avltest.cpp")
